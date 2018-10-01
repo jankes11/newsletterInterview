@@ -4,11 +4,11 @@
 						
 		if ($_POST['submit']){
 			$con=mysqli_connect("shareddb1e.hosting.stackcp.net","BMsCustomersList-36370646","53tzye53","BMsCustomersList-36370646");
-			if(!$_POST['emailAddress']) $successMessage = '<div class="alert alert-warning" role="alert">Please enter an email address</div>';
+			if(!$_POST['emailAddress']) $displayMessage = '<div class="alert alert-warning" role="alert">Please enter an email address</div>';
 				else if (!(filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL))) 
-					$successMessage = '<div class="alert alert-warning" role="alert">Please enter a valid email address</div>';
+					$displayMessage = '<div class="alert alert-warning" role="alert">Please enter a valid email address</div>';
 				
-		if(!$_POST['subscriberName']) $successMessage = '<div class="alert alert-warning" role="alert">Please enter your name</div>';
+		if(!$_POST['subscriberName']) $displayMessage = '<div class="alert alert-warning" role="alert">Please enter your name</div>';
 		
 		if($error) echo	"There where error(s) in your signup details: ".$error;
 		
@@ -18,14 +18,14 @@
 			$results=mysqli_num_rows($result);
 			
 			if($results) {
-				$successMessage = '<div class="alert alert-warning" role="alert">This email address is already registered</div>';
+				$displayMessage = '<div class="alert alert-warning" role="alert">This email address is already registered</div>';
 				echo '<script>localStorage.setItem("myModall", "false");</script>';
 				header("refresh:5;http://bmcleaningservice.co.uk");
 				}
 			else{
 			$query="INSERT INTO CustomersList VALUES('$subscriberName','$emailAddress')";
 			mysqli_query($con,$query);
-			$successMessage = '<div class="alert alert-success" role="alert">Well done! You just subscibed to our fantastic newsletter!</div>';
+			$displayMessage = '<div class="alert alert-success" role="alert">Well done! You just subscibed to our fantastic newsletter!</div>';
 			echo '<script>localStorage.setItem("myModall", "true");</script>';
 				
 			}
@@ -185,7 +185,7 @@ _atrk_opts = { atrk_acct:"iJhoq1hNdI20fn", domain:"bmcleaningservice.co.uk",dyna
 
 </div>
 
- <div class="col-sm-12 form-group" id="error"><? echo $error.$successMessage; ?></div>
+ <div class="col-sm-12 form-group" id="error"><? echo $error.$displayMessage; ?></div>
 <!-- Modal -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" >
@@ -383,7 +383,7 @@ Our service is always personal so you have the same best house cleaner each time
 	
     <div class="col-sm-7 slideanim">
       <div class="row">
-	  <div class="col-sm-12 form-group" id="error"><? echo $error.$successMessage; ?></div>
+	  <div class="col-sm-12 form-group" id="error"><? echo $error.$displayMessage; ?></div>
         <div class="col-sm-6 form-group">
           <input class="form-control" id="name" name="name" placeholder="Name" type="text">
         </div>

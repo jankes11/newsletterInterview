@@ -199,7 +199,7 @@ _atrk_opts = { atrk_acct:"iJhoq1hNdI20fn", domain:"bmcleaningservice.co.uk",dyna
         <h5 class="modal-title" id="myModal">Subscribe to our mailing list</h5></br>
 		<form method="POST">
 			<input type="email" name="emailAddress" placeholder="yourname@email.com" required id="emailAddress" />
-			<input type="name" name="subscriberName" placeholder="your name" required id="subscriberName" />	
+			<input type="text" name="subscriberName" placeholder="your name" required id="subscriberName" />	
 		</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

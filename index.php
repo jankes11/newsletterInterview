@@ -13,8 +13,10 @@
 		if($error) echo	"There where error(s) in your signup details: ".$error;
 		
 		else{
-			$query="SELECT * FROM CustomersList WHERE emailAddress=('$emailAddress')"; 
-			$result=mysqli_query($con,$query);
+			$query = $con->prepare('SELECT * FROM CustomersList WHERE emailAddress = ?');
+			$query->bind_param('s', $emailAddress);
+			$query->execute();
+			$result= $query->get_result();
 			$results=mysqli_num_rows($result);
 			
 			if($results) {
@@ -23,8 +25,9 @@
 				header("refresh:5;http://bmcleaningservice.co.uk");
 				}
 			else{
-			$query="INSERT INTO CustomersList VALUES('$subscriberName','$emailAddress')";
-			mysqli_query($con,$query);
+			$query = $con->prepare('INSERT INTO CustomersList VALUES(?, ?)');
+			$query->bind_param('ss', $subscriberName, $emailAddress);
+			$query->execute();
 			$displayMessage = '<div class="alert alert-success" role="alert">Well done! You just subscibed to our fantastic newsletter!</div>';
 			echo '<script>localStorage.setItem("myModall", "true");</script>';
 				
@@ -93,7 +96,7 @@ _atrk_opts = { atrk_acct:"iJhoq1hNdI20fn", domain:"bmcleaningservice.co.uk",dyna
 <!-- End Alexa Certify Javascript -->  
 
 
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
+
   <title>Cleaning Service Falkirk, Bo&apos;ness, Linlithgow</title>
   <meta name="google-site-verification" content="_qVf3Lydk8ZMcX3euXLYLN9gY3RKNn12WKZvATefqMw" />
   <meta content="Cleaning Service Falkirk-Proffessional House Cleaning-Falkirk Cleaning Services -Services: Residential Cleaning, Maid Services, Housekeepers, Dusting, Vacuuming" name="description"/>

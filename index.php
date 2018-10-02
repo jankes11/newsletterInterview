@@ -35,6 +35,7 @@
 			}
 			
 		}
+		mysqli_close($con);
 
 ?>
 
